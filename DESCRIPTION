@@ -1,0 +1,20 @@
+Package: DisulfRisk
+Title: Disulfidptosis-Related Weighted DRS Scoring for Expression Cohorts
+Version: 0.1.0
+Authors@R: 
+    person("DisulfRisk", "Team", email = "disulfrisk@example.org", role = c("aut", "cre"))
+Description: Provides a small workflow for preparing bulk expression
+    matrices and calculating a 20-gene disulfidptosis-related weighted
+    DRS (disulfidptosis risk score). The package reads expression files
+    from csv, tsv, or txt inputs, validates a bundled coefficient table,
+    computes gene-wise z-scores within the input cohort, and returns
+    sample-level DRS scores and groups.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 4.1.0)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
