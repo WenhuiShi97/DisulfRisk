@@ -245,7 +245,7 @@ plot_drs_distribution <- function(
   graphics::segments(
     x0 = rep(usr[1], length(tick_at)),
     y0 = tick_at,
-    x1 = rep(usr[1] + tick_length_x, length(tick_at)),
+    x1 = rep(usr[1] - tick_length_x, length(tick_at)),
     y1 = tick_at,
     col = "#4D4D4D",
     lwd = 1.1
