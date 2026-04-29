@@ -8,6 +8,7 @@ plot_drs_distribution(
   group_cutoff = 0,
   main = "DRS score distribution",
   ylab = "DRS score",
+  ylim = NULL,
   las = 2,
   ...
 )
@@ -26,7 +27,10 @@ plot_drs_distribution(
 
   \item{ylab}{Y-axis label.}
 
-  \item{las}{Axis label orientation passed to \code{\link[graphics]{barplot}}.}
+  \item{ylim}{Optional numeric vector of length 2 giving the y-axis range.}
+
+  \item{las}{Sample label orientation. The default value \code{2} draws labels
+  vertically.}
 
   \item{...}{Additional arguments passed to \code{\link[graphics]{barplot}}.}
 }

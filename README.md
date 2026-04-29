@@ -167,8 +167,13 @@ result <- predict_drs(input_data, model = model)
 To visualize the score distribution:
 
 ```r
-plot_drs_distribution(result)
+# Fix the y-axis to -4 to 4 for a compact display on the README page
+plot_drs_distribution(result, ylim = c(-4, 4))
 ```
+
+Example DRS distribution plot:
+
+![Example DRS distribution plot](man/figures/plot_drs_distribution_example.svg)
 
 ### 6.Notes for users
 
@@ -185,3 +190,9 @@ plot_drs_distribution(result)
 | `inst/extdata/drs_coefficients.csv` | Bundled 20-gene coefficient table used by `load_drs_model()` |
 | `inst/extdata/example_expression.csv` | Example expression matrix used in the README, examples, and tests |
 | `inst/extdata/2_Model_Coefficients.csv` | Existing project file retained in the repository |
+
+### 8.Citation
+
+If you use `DisulfRisk` in your work, please cite:
+
+Shi W. *Disulfidptosis phenotype defines prognostically adverse glioma states associated with immune exhaustion*. Unpublished manuscript.

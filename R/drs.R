@@ -171,7 +171,9 @@ drs_pre <- function(input_data, model = NULL, group_cutoff = 0) {
 #'   already a prediction result. Defaults to `0`.
 #' @param main Plot title.
 #' @param ylab Y-axis label.
-#' @param las Axis label orientation passed to [graphics::barplot()].
+#' @param ylim Optional numeric vector of length 2 giving the y-axis range.
+#' @param las Sample label orientation. The default value `2` draws labels
+#'   vertically.
 #' @param ... Additional arguments passed to [graphics::barplot()].
 #'
 #' @return Invisibly returns the plotted prediction data frame.
@@ -182,6 +184,7 @@ plot_drs_distribution <- function(
   group_cutoff = 0,
   main = "DRS score distribution",
   ylab = "DRS score",
+  ylim = NULL,
   las = 2,
   ...
 ) {
@@ -193,24 +196,93 @@ plot_drs_distribution <- function(
 
   ordered_result <- result[order(result$DRS_score), , drop = FALSE]
   bar_col <- ifelse(ordered_result$DRS_group == "High", "#D55E00", "#0072B2")
+  if (is.null(ylim)) {
+    score_range <- range(c(ordered_result$DRS_score, group_cutoff))
+    score_span <- diff(score_range)
+    if (score_span == 0) {
+      ylim <- score_range + c(-1, 1)
+    } else {
+      ylim <- score_range + c(-0.08, 0.08) * score_span
+    }
+  }
+  .validate_ylim(ylim)
 
-  graphics::barplot(
+  old_par <- graphics::par(no.readonly = TRUE)
+  on.exit(graphics::par(old_par), add = TRUE)
+  graphics::par(mar = c(9, 5, 4, 8) + 0.1, xpd = NA)
+
+  mids <- graphics::barplot(
     height = ordered_result$DRS_score,
-    names.arg = ordered_result$Sample,
+    names.arg = rep("", nrow(ordered_result)),
     col = bar_col,
     border = NA,
-    las = las,
+    axes = FALSE,
+    axisnames = FALSE,
     ylab = ylab,
     main = main,
+    ylim = ylim,
     ...
   )
-  graphics::abline(h = group_cutoff, lty = 2, lwd = 2, col = "gray30")
+
+  usr <- graphics::par("usr")
+  tick_at <- pretty(ylim, n = 5L)
+  tick_at <- tick_at[tick_at >= ylim[1] & tick_at <= ylim[2]]
+  tick_length_x <- 0.018 * diff(usr[1:2])
+
+  for (tick in tick_at) {
+    graphics::segments(
+      x0 = usr[1],
+      y0 = tick,
+      x1 = usr[2],
+      y1 = tick,
+      col = grDevices::adjustcolor("#D9D9D9", alpha.f = 0.8),
+      lwd = 1
+    )
+  }
+
+  graphics::segments(usr[1], ylim[1], usr[1], ylim[2], col = "#2F2F2F", lwd = 1.2)
+  graphics::segments(usr[1], group_cutoff, usr[2], group_cutoff, col = "#4D4D4D", lwd = 1.8)
+  graphics::segments(
+    x0 = rep(usr[1], length(tick_at)),
+    y0 = tick_at,
+    x1 = rep(usr[1] + tick_length_x, length(tick_at)),
+    y1 = tick_at,
+    col = "#4D4D4D",
+    lwd = 1.1
+  )
+  graphics::axis(
+    side = 2,
+    at = tick_at,
+    labels = tick_at,
+    las = 1,
+    col.axis = "#4D4D4D",
+    col = NA,
+    col.ticks = NA,
+    tick = FALSE
+  )
+
+  label_angle <- if (identical(las, 2)) 90 else 0
+  label_y <- ylim[1] - 0.04 * diff(ylim)
+  graphics::text(
+    x = mids,
+    y = rep(label_y, length(mids)),
+    labels = ordered_result$Sample,
+    srt = label_angle,
+    adj = if (label_angle == 90) 1 else c(0.5, 1),
+    cex = 0.9,
+    col = "#333333",
+    xpd = NA
+  )
+
+  graphics::mtext("Sample", side = 1, line = 7.2, cex = 0.95, col = "#333333")
   graphics::legend(
     "topright",
+    inset = c(-0.20, 0),
     legend = c("High", "Low"),
     fill = c("#D55E00", "#0072B2"),
     border = NA,
-    bty = "n"
+    bty = "n",
+    title = "DRS group"
   )
 
   invisible(ordered_result)
@@ -489,6 +561,12 @@ plot_drs_distribution <- function(
 .validate_group_cutoff <- function(group_cutoff) {
   if (!is.numeric(group_cutoff) || length(group_cutoff) != 1L || is.na(group_cutoff)) {
     stop("`group_cutoff` must be a single numeric value.", call. = FALSE)
+  }
+}
+
+.validate_ylim <- function(ylim) {
+  if (!is.numeric(ylim) || length(ylim) != 2L || anyNA(ylim) || ylim[1] >= ylim[2]) {
+    stop("`ylim` must be a numeric vector of length 2 with increasing values.", call. = FALSE)
   }
 }
 

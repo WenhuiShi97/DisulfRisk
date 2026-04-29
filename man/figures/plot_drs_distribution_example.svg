@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" role="img" aria-labelledby="title desc">
+  <title id="title">Example DRS distribution plot</title>
+  <desc id="desc">A styled DRS distribution bar plot with legend on the right, y-axis ranging from minus four to four, and vertical sample labels placed below the panel.</desc>
+
+  <rect x="0" y="0" width="980" height="620" fill="#ffffff"/>
+  <rect x="88" y="84" width="640" height="340" rx="10" ry="10" fill="#fbfbfb" stroke="#ececec" stroke-width="1.2"/>
+  <text x="408" y="44" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#222222">DRS score distribution</text>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#666666" text-anchor="end">
+    <line x1="108" y1="84" x2="708" y2="84" stroke="#ececec" stroke-width="1"/>
+    <text x="94" y="88">4</text>
+    <line x1="108" y1="169" x2="708" y2="169" stroke="#ececec" stroke-width="1"/>
+    <text x="94" y="173">2</text>
+    <line x1="108" y1="254" x2="708" y2="254" stroke="#d2d2d2" stroke-width="1.8"/>
+    <text x="94" y="258">0</text>
+    <line x1="108" y1="339" x2="708" y2="339" stroke="#ececec" stroke-width="1"/>
+    <text x="94" y="343">-2</text>
+    <line x1="108" y1="424" x2="708" y2="424" stroke="#ececec" stroke-width="1"/>
+    <text x="94" y="428">-4</text>
+  </g>
+
+  <line x1="108" y1="84" x2="108" y2="424" stroke="#2f2f2f" stroke-width="1.6"/>
+  <line x1="108" y1="254" x2="708" y2="254" stroke="#4d4d4d" stroke-width="2"/>
+  <g stroke="#4d4d4d" stroke-width="1.4">
+    <line x1="108" y1="84" x2="119" y2="84"/>
+    <line x1="108" y1="169" x2="119" y2="169"/>
+    <line x1="108" y1="254" x2="119" y2="254"/>
+    <line x1="108" y1="339" x2="119" y2="339"/>
+    <line x1="108" y1="424" x2="119" y2="424"/>
+  </g>
+
+  <defs>
+    <clipPath id="panel-clip">
+      <rect x="108" y="84" width="600" height="340" rx="0" ry="0"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#panel-clip)">
+    <rect x="133" y="254" width="58" height="170" fill="#0072B2"/>
+    <rect x="228" y="254" width="58" height="142.84" fill="#0072B2"/>
+    <rect x="323" y="254" width="58" height="58.52" fill="#0072B2"/>
+    <rect x="418" y="215.25" width="58" height="38.75" fill="#D55E00"/>
+    <rect x="513" y="109.78" width="58" height="144.22" fill="#D55E00"/>
+    <rect x="608" y="84" width="58" height="170" fill="#D55E00"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#333333" text-anchor="middle">
+    <text transform="translate(162,476) rotate(-90)">Sample_01</text>
+    <text transform="translate(257,476) rotate(-90)">Sample_02</text>
+    <text transform="translate(352,476) rotate(-90)">Sample_03</text>
+    <text transform="translate(447,476) rotate(-90)">Sample_04</text>
+    <text transform="translate(542,476) rotate(-90)">Sample_05</text>
+    <text transform="translate(637,476) rotate(-90)">Sample_06</text>
+  </g>
+
+  <text x="408" y="570" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#333333">Sample</text>
+  <text x="36" y="254" transform="rotate(-90 36 254)" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#333333">DRS score</text>
+
+  <g transform="translate(782 162)" font-family="Arial, Helvetica, sans-serif" fill="#333333">
+    <text x="0" y="-18" font-size="16" font-weight="700">DRS group</text>
+    <rect x="0" y="0" width="18" height="18" rx="3" ry="3" fill="#D55E00"/>
+    <text x="28" y="14" font-size="14">High</text>
+    <rect x="0" y="34" width="18" height="18" rx="3" ry="3" fill="#0072B2"/>
+    <text x="28" y="48" font-size="14">Low</text>
+  </g>
+</svg>
