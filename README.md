@@ -173,7 +173,7 @@ plot_drs_distribution(result, ylim = c(-4, 4))
 
 Example DRS distribution plot:
 
-![Example DRS distribution plot](man/figures/plot_drs_distribution_example.svg)
+![Example DRS distribution plot](man/figures/plot_drs_distribution_example_v2.svg)
 
 ### 6.Notes for users
 
